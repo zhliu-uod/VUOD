@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="VUOD: A Versatile Unsupervised Outlier Detection Framework for Images.">
+  <meta name="keywords" content="Unsupervised, Outlier Detection, Versatile Applications">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VUOD: A Versatile Unsupervised Outlier Detection Framework for Images</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://zhonghang-liu.github.io/homepage/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://www.kind-of-works.com/LVAD_anomaly_detector.html">
+            LVAD (ECCV-2022)
+          </a>
+          <a class="navbar-item" href="https://eccv2024.ecva.net/virtual/2024/poster/453">
+            Multi-T (ECCV-2024)
+          </a>
+          <a class="navbar-item" href="https://cvpr.thecvf.com/virtual/2025/poster/34426">
+            FlexUOD (CVPR-2025)
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">VUOD: A Versatile Unsupervised Outlier Detection Framework for Images</h1>
+          <h2 class="subtitle is-size-4 has-text-centered" style="margin-top: 10px; color: #555;">
+          Accepted by ECCV 2026
+          </h2>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+
+              <a href="https://zhonghang-liu.github.io/homepage/">Zhonghang Liu</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://openreview.net/profile?id=~Siyuan_Chen19">Siyuan Chen</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://jingwenyust.github.io/">Jingwen Yu</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://changshuowang.github.io/">Changshuo Wang</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://openreview.net/profile?id=~Kunyang_Li3">Kunyang Li</a><sup>4</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://sites.google.com/site/jiangbolu/">Jiangbo Lu</a><sup>1</sup>
+          <span class="icon" style="font-size: 0.7em">
+          <i class="fas fa-envelope"></i>
+          </span>,
+            </span>
+          </div>
+          
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>SmartMore Corporation,</span>
+            <span class="author-block"><sup>2</sup>The Hong Kong University of Science and Technology</span>
+            <span class="author-block"><sup>3</sup>University College London</span>
+            <span class="author-block"><sup>4</sup>Rice University</span>
+          </div>
+
+          <div class="column has-text-centered">
+  <p>
+    <span class="icon" style="font-size: 0.7em">
+  <i class="fas fa-envelope"></i>
+    </span> 
+    Indicates corresponding author.
+  </p>
+</div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://openreview.net/forum?id=fOsrQmB22K&referrer=%5BAuthor+Console%5D%28%2Fgroup%3Fid%3Dthecvf.com%2FECCV%2F2026%2FConference%2FAuthors%23your-submissions%29"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://openreview.net/forum?id=fOsrQmB22K&referrer=%5BAuthor+Console%5D%28%2Fgroup%3Fid%3Dthecvf.com%2FECCV%2F2026%2FConference%2FAuthors%23your-submissions%29"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span> 
+                  </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body has-text-centered"> <h2 class="title is-3 has-text-centered">Teaser</h2>
+      <div style="display: flex; justify-content: center;">
+        <img id="Teaser" src="./images_vuod/teasing_photo.jpg" alt="Teaser Image" style="height: 100%; width: auto; display: block;">
+      </div>
+
+      <h2 class="subtitle has-text-centered mt-4"> Left plot: VUOD significantly outperforms existing SOTAs on UOD benchmark datasets and real-world applications.
+        More importantly, VUOD can be seamlessly integrated into various downstream visual tasks,
+        such as image classification (middle plot) and 3D reconstruction with VGGT (right plot).
+      </h2>
+    </div>
+  </div>
+</section>
+
+  
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Unsupervised outlier detection that automatically identifies whether visual systems involve anomalous images is a significant research topic.
+            However, most approaches are constrained to natural images, as they rely on frozen, pre-trained feature extractors.
+            So that their performance cannot be maintained in practical scenarios, especially for industrial inspection and medical imaging.
+            In this work, we first revisit this task and then introduce a versatile unsupervised outlier detection framework to enrich the application domains.
+            The core idea of this framework is to improve feature discriminativess via exploring intrinsic distribution priors.
+            Evaluated on 14 benchmark datasets, our proposed solution achieves state-of-the-art performance and significantly outperforms existing methods.
+            More importantly, we show its plug-and-play property that can be integrated into diverse visual applications to improve their robustness, such as image classification and 3D reconstruction.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--/ Abstract. -->
+
+
+    <!--/ Paper image. -->
+
+  </div>
+
+</section>
+
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <!-- Visual Effects. -->
+      <div class="column">
+  <div class="content">
+
+    <h2 class="title is-3">Local Separability</h2>
+
+    <p>
+
+      we adopt <i>Affinity Propagation</i> (<i>AP</i>), which will split the target dataset's features 
+      into a series of fine-grained clusters. All clusters can be divided into three categories: 
+      inlier clusters that each cluster mostly contains inliers;
+      outlier clusters that each cluster mostly contains outliers;
+      mixed clusters that contain both inliers and outliers.
+
+    </p>
+
+    <img src="./images_vuod/local_separability.jpg" alt="Local Separability" style="width: 100%; height: auto;">
+
+      </div>
+
+        </div>
+
+      <!--/ Visual Effects. -->
+
+
+
+      <!-- Matting. -->
+
+      <div class="column">
+
+        <h2 class="title is-3">Framework</h2>
+
+        <div class="columns is-centered">
+
+          <div class="column content">
+            <p>
+              An unlabeled target dataset is first processed by natural image pretrained feature extractors. 
+              We then investigate the intrinsic priors of the feature space (local and global separability), and generate pseudo labels.
+              Based on predicted inliers and outliers, we apply contrastive learning to enhance the discriminativeness of the feature representations.
+            </p>
+            <img src="./images_vuod/framework.jpg" alt="Framework" style="width: 100%; height: auto;">
+            </image>
+
+          </div>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!--/ Matting. -->
+
+
+
+    <div class="container is-max-desktop">
+
+      <h2 class="title is-3">Experiments</h2>
+
+        <h3 class="title is-4 has-text-centered" style="margin-bottom: 20px;">
+        Table 1: Average AUC results on a series of natural image datasets. The best results are highlighted in bold.
+        </h3>
+
+  
+
+  <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+
+    <thead>
+
+      <tr>
+
+        <th class="has-text-centered">Method</th>
+
+        <th class="has-text-centered">Venue</th>
+
+        <th class="has-text-centered">STL-10</th>
+
+        <th class="has-text-centered">Internet</th>
+
+        <th class="has-text-centered">Caltech-101</th>
+
+        <th class="has-text-centered">CIFAR-10</th>
+
+        <th class="has-text-centered">CIFAR-100</th>
+
+        <th class="has-text-centered">MIT-Places</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr>
+
+        <td>Deep SVDD </td>
+
+        <td class="has-text-centered">ICML-2018</td>
+
+        <td class="has-text-centered">0.593</td>
+
+        <td class="has-text-centered">0.674</td>
+
+        <td class="has-text-centered">0.745</td>
+
+        <td class="has-text-centered">0.533</td>
+
+        <td class="has-text-centered">0.575</td>
+
+        <td class="has-text-centered">0.539</td>
+
+      </tr>
+
+      <tr>
+
+        <td>RSRAE </td>
+
+        <td class="has-text-centered">ICLR-2019</td>
+
+        <td class="has-text-centered">0.903</td>
+
+        <td class="has-text-centered">0.916</td>
+
+        <td class="has-text-centered">0.986</td>
+
+        <td class="has-text-centered">0.816</td>
+
+        <td class="has-text-centered">0.889</td>
+
+        <td class="has-text-centered">0.778</td>
+
+      </tr>
+
+      <tr>
+
+        <td>GOAD </td>
+
+        <td class="has-text-centered">ICLR-2020</td>
+
+        <td class="has-text-centered">0.946</td>
+
+        <td class="has-text-centered">0.945</td>
+
+        <td class="has-text-centered">0.981</td>
+
+        <td class="has-text-centered">0.862</td>
+
+        <td class="has-text-centered">0.886</td>
+
+        <td class="has-text-centered">0.871</td>
+
+      </tr>
+
+      <tr>
+
+        <td>Shell-Re </td>
+
+        <td class="has-text-centered">TPAMI-2021</td>
+
+        <td class="has-text-centered">0.866</td>
+
+        <td class="has-text-centered">0.896</td>
+
+        <td class="has-text-centered">0.905</td>
+
+        <td class="has-text-centered">0.867</td>
+
+        <td class="has-text-centered">0.834</td>
+
+        <td class="has-text-centered">0.822</td>
+
+      </tr>
+
+      <tr>
+
+        <td>NeuTraL </td>
+
+        <td class="has-text-centered">ICML-2021</td>
+
+        <td class="has-text-centered">0.828</td>
+
+        <td class="has-text-centered">0.877</td>
+
+        <td class="has-text-centered">0.633</td>
+
+        <td class="has-text-centered">0.748</td>
+
+        <td class="has-text-centered">0.815</td>
+
+        <td class="has-text-centered">0.711</td>
+
+      </tr>
+
+      <tr>
+
+        <td>ICL </td>
+
+        <td class="has-text-centered">ICLR-2022</td>
+
+        <td class="has-text-centered">0.929</td>
+
+        <td class="has-text-centered">0.937</td>
+
+        <td class="has-text-centered">0.964</td>
+
+        <td class="has-text-centered">0.859</td>
+
+        <td class="has-text-centered">0.911</td>
+
+        <td class="has-text-centered">0.832</td>
+
+      </tr>
+
+      <tr>
+
+        <td>LUNAR </td>
+
+        <td class="has-text-centered">AAAI-2022</td>
+
+        <td class="has-text-centered">0.781</td>
+
+        <td class="has-text-centered">0.776</td>
+
+        <td class="has-text-centered">0.923</td>
+
+        <td class="has-text-centered">0.766</td>
+
+        <td class="has-text-centered">0.859</td>
+
+        <td class="has-text-centered">0.698</td>
+
+      </tr>
+
+      <tr>
+
+        <td>ECOD </td>
+
+        <td class="has-text-centered">TKDE-2022</td>
+
+        <td class="has-text-centered">0.932</td>
+
+        <td class="has-text-centered">0.925</td>
+
+        <td class="has-text-centered">0.976</td>
+
+        <td class="has-text-centered">0.888</td>
+
+        <td class="has-text-centered">0.905</td>
+
+        <td class="has-text-centered">0.846</td>
+
+      </tr>
+
+      <tr>
+
+        <td>LVAD </td>
+
+        <td class="has-text-centered">ECCV-2022</td>
+
+        <td class="has-text-centered">0.948</td>
+
+        <td class="has-text-centered">0.923</td>
+
+        <td class="has-text-centered">0.977</td>
+
+        <td class="has-text-centered">0.864</td>
+
+        <td class="has-text-centered">0.907</td>
+
+        <td class="has-text-centered">0.860</td>
+
+      </tr>
+
+      <tr>
+
+        <td>SLAD </td>
+
+        <td class="has-text-centered">ICML-2023</td>
+
+        <td class="has-text-centered">0.923</td>
+
+        <td class="has-text-centered">0.919</td>
+
+        <td class="has-text-centered">0.888</td>
+
+        <td class="has-text-centered">0.861</td>
+
+        <td class="has-text-centered">0.899</td>
+
+        <td class="has-text-centered">0.846</td>
+
+      </tr>
+
+      <tr>
+
+        <td>DeepIF </td>
+
+        <td class="has-text-centered">TKDE-2023</td>
+
+        <td class="has-text-centered">0.858</td>
+
+        <td class="has-text-centered">0.866</td>
+
+        <td class="has-text-centered">0.874</td>
+
+        <td class="has-text-centered">0.801</td>
+
+        <td class="has-text-centered">0.808</td>
+
+        <td class="has-text-centered">0.765</td>
+
+      </tr>
+
+      <tr>
+
+        <td>Multi-T </td>
+
+        <td class="has-text-centered">ECCV-2024</td>
+
+        <td class="has-text-centered">0.957</td>
+
+        <td class="has-text-centered">0.956</td>
+
+        <td class="has-text-centered">0.985</td>
+
+        <td class="has-text-centered">0.888</td>
+
+        <td class="has-text-centered">0.917</td>
+
+        <td class="has-text-centered">0.859</td>
+
+      </tr>
+
+      <tr>
+
+        <td>FlexUOD </td>
+
+        <td class="has-text-centered">CVPR-2025</td>
+
+        <td class="has-text-centered">0.980</td>
+
+        <td class="has-text-centered">0.981</td>
+
+        <td class="has-text-centered">0.983</td>
+
+        <td class="has-text-centered">0.942</td>
+
+        <td class="has-text-centered">0.947</td>
+
+        <td class="has-text-centered">0.928</td>
+
+      </tr>
+
+      <tr style="background-color: #fff9f9;">
+
+        <td><strong>VUOD (Ours)</strong></td>
+
+        <td class="has-text-centered">—</td>
+
+        <td class="has-text-centered"><strong>0.994</strong></td>
+
+        <td class="has-text-centered"><strong>0.991</strong></td>
+
+        <td class="has-text-centered"><strong>0.994</strong></td>
+
+        <td class="has-text-centered"><strong>0.972</strong></td>
+
+        <td class="has-text-centered"><strong>0.981</strong></td>
+
+        <td class="has-text-centered"><strong>0.971</strong></td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+</nav>
+
+    <div style="margin-top: 40px;"></div>
+
+    <div class="container is-max-desktop">
+
+  <h3 class="title is-4 has-text-centered" style="margin-bottom: 20px;">
+
+    Table 2: AUC results on industrial inspection and medical imaging (disease detection).
+
+  </h3>
+
+
+
+  <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+
+    <thead>
+
+      <tr>
+
+        <th rowspan="2" class="has-text-centered" style="vertical-align: middle;">Type</th>
+
+        <th rowspan="2" class="has-text-centered" style="vertical-align: middle;">Dataset</th>
+
+        <th colspan="5" class="has-text-centered">ResNet-18</th>
+
+        <th colspan="5" class="has-text-centered">Wide ResNet-101</th>
+
+      </tr>
+
+      <tr>
+
+        <th class="has-text-centered">RSRAE</th>
+
+        <th class="has-text-centered">LVAD</th>
+
+        <th class="has-text-centered">Multi-T</th>
+
+        <th class="has-text-centered">FlexUOD</th>
+
+        <th class="has-text-centered">VUOD</th>
+
+        <th class="has-text-centered">RSRAE</th>
+
+        <th class="has-text-centered">LVAD</th>
+
+        <th class="has-text-centered">Multi-T</th>
+
+        <th class="has-text-centered">FlexUOD</th>
+
+        <th class="has-text-centered">VUOD</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr>
+
+        <td rowspan="4" class="has-text-centered" style="vertical-align: middle;">Industrial</td>
+
+        <td>MVTec-AD</td>
+
+        <td class="has-text-centered">0.709</td><td class="has-text-centered">0.779</td><td class="has-text-centered">0.757</td><td class="has-text-centered">0.752</td><td class="has-text-centered"><strong>0.911</strong></td>
+
+        <td class="has-text-centered">0.770</td><td class="has-text-centered">0.799</td><td class="has-text-centered">0.780</td><td class="has-text-centered">0.778</td><td class="has-text-centered"><strong>0.931</strong></td>
+
+      </tr>
+
+      <tr>
+
+        <td>BTAD</td>
+
+        <td class="has-text-centered">0.873</td><td class="has-text-centered">0.894</td><td class="has-text-centered">0.885</td><td class="has-text-centered">0.882</td><td class="has-text-centered"><strong>0.902</strong></td>
+
+        <td class="has-text-centered">0.846</td><td class="has-text-centered">0.884</td><td class="has-text-centered">0.886</td><td class="has-text-centered">0.883</td><td class="has-text-centered"><strong>0.928</strong></td>
+
+      </tr>
+
+      <tr>
+
+        <td>MPDD</td>
+
+        <td class="has-text-centered">0.618</td><td class="has-text-centered">0.573</td><td class="has-text-centered">0.563</td><td class="has-text-centered">0.564</td><td class="has-text-centered"><strong>0.906</strong></td>
+
+        <td class="has-text-centered">0.592</td><td class="has-text-centered">0.602</td><td class="has-text-centered">0.603</td><td class="has-text-centered">0.595</td><td class="has-text-centered"><strong>0.926</strong></td>
+
+      </tr>
+
+      <tr>
+
+        <td>MVTec-LOCO</td>
+
+        <td class="has-text-centered">0.655</td><td class="has-text-centered">0.693</td><td class="has-text-centered">0.661</td><td class="has-text-centered">0.663</td><td class="has-text-centered"><strong>0.812</strong></td>
+
+        <td class="has-text-centered">0.629</td><td class="has-text-centered">0.695</td><td class="has-text-centered">0.657</td><td class="has-text-centered">0.660</td><td class="has-text-centered"><strong>0.832</strong></td>
+
+      </tr>
+
+      <tr>
+
+        <td rowspan="4" class="has-text-centered" style="vertical-align: middle;">Medical</td>
+
+        <td>LiverCT</td>
+
+        <td class="has-text-centered">0.666</td><td class="has-text-centered">0.663</td><td class="has-text-centered">0.696</td><td class="has-text-centered">0.708</td><td class="has-text-centered"><strong>0.813</strong></td>
+
+        <td class="has-text-centered">0.703</td><td class="has-text-centered">0.571</td><td class="has-text-centered">0.652</td><td class="has-text-centered">0.567</td><td class="has-text-centered"><strong>0.838</strong></td>
+
+      </tr>
+
+      <tr>
+
+        <td>BrainMRI</td>
+
+        <td class="has-text-centered">0.541</td><td class="has-text-centered">0.623</td><td class="has-text-centered">0.583</td><td class="has-text-centered">0.584</td><td class="has-text-centered"><strong>0.804</strong></td>
+
+        <td class="has-text-centered">0.676</td><td class="has-text-centered">0.647</td><td class="has-text-centered">0.652</td><td class="has-text-centered">0.578</td><td class="has-text-centered"><strong>0.790</strong></td>
+
+      </tr>
+
+      <tr>
+
+        <td>OCT</td>
+
+        <td class="has-text-centered">0.524</td><td class="has-text-centered">0.778</td><td class="has-text-centered">0.730</td><td class="has-text-centered">0.612</td><td class="has-text-centered"><strong>0.880</strong></td>
+
+        <td class="has-text-centered">0.713</td><td class="has-text-centered">0.811</td><td class="has-text-centered">0.725</td><td class="has-text-centered">0.588</td><td class="has-text-centered"><strong>0.877</strong></td>
+
+      </tr>
+
+      <tr>
+
+        <td>RESC</td>
+
+        <td class="has-text-centered">0.712</td><td class="has-text-centered">0.810</td><td class="has-text-centered">0.823</td><td class="has-text-centered"><strong>0.948</strong></td><td class="has-text-centered">0.901</td>
+
+        <td class="has-text-centered">0.662</td><td class="has-text-centered">0.746</td><td class="has-text-centered">0.644</td><td class="has-text-centered">0.589</td><td class="has-text-centered"><strong>0.931</strong></td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+    <!-- Animation. -->
+
+    <div style="margin-top: 40px;"></div>
+
+    <section class="hero teaser">
+
+  <div class="container is-max-desktop">
+
+    <div class="hero-body has-text-centered"> <h3 class="title is-4 has-text-centered">3D Dense Point Map Reconstruction Results of VGGT</h3>
+
+      
+
+      <div style="display: flex; justify-content: center;">
+
+        <img id="3D Reconstruction" src="./images_vuod/3d_reconstruction.jpg" alt="3D Reconstruction" style="height: 100%; width: auto; display: block;">
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+        <!--/ Interpolating. -->
+
+ 
+
+<section class="section" id="BibTeX">
+
+  <div class="container is-max-desktop content">
+
+    <h2 class="title">BibTeX</h2>
+
+    <pre><code>@article{liu2026vuod,
+  author    = {Zhonghang Liu, Siyuan Chen, Jingwen Yu, Changshuo Wang, Kunyang Li, Jiangbo Lu},
+  title     = {VUOD: A Versatile Unsupervised Outlier Detection Framework for Images},
+  journal   = {European Conference on Computer Vision},
+  year      = {2026},
+}</code></pre>
+
+  </div>
+
+</section>
+
+
+
+
+
+<footer style="text-align: center; line-height: 1.6; padding: 20px 0;">
+
+  <p>
+
+    This website is licensed under a 
+
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">
+
+      Creative Commons Attribution-ShareAlike 4.0 International License
+
+    </a>.
+
+  </p>
+
+  <p>
+
+    Website source code based on the 
+
+    <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener noreferrer">
+
+      Nerfies project page
+
+    </a>. 
+
+    If you want to reuse their source code, please credit them appropriately.
+
+  </p>
+
+</footer>
+
+
+
+</body>
+
+</html> 
+
